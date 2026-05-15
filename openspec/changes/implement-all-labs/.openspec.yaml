@@ -1,0 +1,17 @@
+name: implement-all-labs
+summary: "Реализация всех лабораторных работ практикума в виде полноценных Flutter проектов"
+team: "author: developer"
+artifacts:
+  - id: proposal
+    type: markdown
+  - id: design
+    type: markdown
+  - id: tasks
+    type: markdown
+apply:
+  requires:
+    - tasks
+metadata:
+  created_by: opsx-propose
+  created_at: 2026-05-15
+
