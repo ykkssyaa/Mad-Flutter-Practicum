@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:mad_flutter_practicum/app/constants.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/app/currency_list/widgets/currency_card.dart';
-import 'package:mad_flutter_practicum/app/login_page.dart';
 import 'package:mad_flutter_practicum/app/news_list/widgets/news_card.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/preference_datasource_impl.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/rest_datasource_impl.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/sqflite_datasorce_impl/sqflite_datasource_impl.dart';
+import 'package:mad_flutter_practicum/data/data.dart';
 import 'package:mad_flutter_practicum/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

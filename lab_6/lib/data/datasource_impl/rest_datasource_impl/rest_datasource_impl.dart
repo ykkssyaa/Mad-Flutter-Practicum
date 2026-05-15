@@ -1,13 +1,10 @@
 import 'dart:convert';
 
 import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/app_http_client.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/mapper/currency_mapper.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/mapper/news_mapper.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/model/currency_dto.dart';
+import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/mapper/mapper.dart';
+import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/model/model.dart';
 import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/rest_path.dart';
-import 'package:mad_flutter_practicum/domain/datasource/rest_datasource.dart';
-import 'package:mad_flutter_practicum/domain/model/currency_model.dart';
-import 'package:mad_flutter_practicum/domain/model/news_model.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:rss_dart/dart_rss.dart';
 
 class RestDatasourceImpl implements RestDatasource {

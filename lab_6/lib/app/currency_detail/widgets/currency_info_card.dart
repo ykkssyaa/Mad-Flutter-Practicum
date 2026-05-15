@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
+import 'package:intl/intl.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 
 class CurrencyInfoCard extends StatelessWidget {
   const CurrencyInfoCard({super.key});
@@ -22,7 +21,7 @@ class CurrencyInfoCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Text(
-                'Ср. 10:47 05.02.25',
+                DateFormat(AppConstants.newsDateTimeFormat).format(DateTime.now()),
                 style: fonts.semiBold12,
               ),
             ),
@@ -30,7 +29,7 @@ class CurrencyInfoCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 6),
             child: Text(
-              '60.99',
+              '60.99 ₽',
               style: fonts.semiBold12.copyWith(color: colors.greenWrasse),
             ),
           ),

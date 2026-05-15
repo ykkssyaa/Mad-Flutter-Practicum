@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mad_flutter_practicum/app/constants.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
-import 'package:mad_flutter_practicum/app/utils/url_launcher.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/domain/model/news_model.dart';
 
 class NewsCard extends StatelessWidget {
@@ -42,7 +38,7 @@ class NewsCard extends StatelessWidget {
                 children: [
                   if (date != null)
                     Text(
-                      DateFormat(AppConstants.newsDateTimeFormat, AppConstants.ruLocale).format(date),
+                      DateFormat(AppConstants.newsDateTimeFormat).format(date),
                       style: fonts.regular12.copyWith(color: colors.tin),
                     ),
                   Text(

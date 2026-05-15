@@ -1,13 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:mad_flutter_practicum/app/constants.dart';
-import 'package:mad_flutter_practicum/app/news_list/news_list_page.dart';
-import 'package:mad_flutter_practicum/domain/model/news_model.dart';
-import 'package:mad_flutter_practicum/domain/repository/news_repository.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
 import '../mocks/repository.mocks.dart';
+
 import 'widget.dart';
 
 Future<void> main() async {

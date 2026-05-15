@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key, required this.onChanged});
@@ -19,7 +18,7 @@ class SearchView extends StatelessWidget {
             child: Image.asset('assets/icons/search.png'),
           ),
         ),
-        hintText: 'Поиск',
+        hintText: context.loc.search,
       ),
     );
   }

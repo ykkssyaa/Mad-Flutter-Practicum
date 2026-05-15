@@ -1,14 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/currency_repository_impl.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/news_repository_impl.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/settings_repository_impl.dart';
-import 'package:mad_flutter_practicum/domain/model/app_theme_mode.dart';
-import 'package:mad_flutter_practicum/domain/model/news_model.dart';
-import 'package:mad_flutter_practicum/domain/repository/currency_repository.dart';
-import 'package:mad_flutter_practicum/domain/repository/news_repository.dart';
-import 'package:mad_flutter_practicum/domain/repository/settings_repository.dart';
+import 'package:mad_flutter_practicum/data/data.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:mockito/mockito.dart';
-import 'package:mad_flutter_practicum/domain/model/currency_model.dart';
 
 import '../mocks/datasource.mocks.dart';
 

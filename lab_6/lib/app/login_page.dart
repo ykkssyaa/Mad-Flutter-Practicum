@@ -1,23 +1,53 @@
-import 'dart:math';
+import 'dart:math' show Random, pi;
 
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/domain/repository/settings_repository.dart';
-import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initAnimation();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _initAnimation() {
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => context.read<SettingsRepository>().setToken(_generateRandomToken()),
-          child: Text(
-            'Войти',
-            style: context.fonts.regular14,
+        child: AnimatedBuilder(
+          animation: _controller,
+          child: ElevatedButton(
+            onPressed: () => context.read<SettingsRepository>().setToken(_generateRandomToken()),
+            child: Text(
+              context.loc.login,
+              style: context.fonts.regular14,
+            ),
           ),
+          builder: (BuildContext context, Widget? child) {
+            return Transform.rotate(angle: _controller.value * 2 * pi, child: child);
+          },
         ),
       ),
     );

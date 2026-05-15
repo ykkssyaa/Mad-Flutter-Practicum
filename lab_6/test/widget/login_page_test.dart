@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mad_flutter_practicum/app/login_page.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/settings_repository_impl.dart';
-import 'package:mad_flutter_practicum/domain/repository/settings_repository.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
+import 'package:mad_flutter_practicum/data/data.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
 import '../mocks/datasource.mocks.dart';
 

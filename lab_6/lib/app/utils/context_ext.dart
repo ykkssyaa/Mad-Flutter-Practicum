@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 
 final _cachedTheme = AppThemeData.light();
+
+final _cachedLocale = AppLocalizationsRu();
 
 extension ThemeContextExtension on BuildContext {
   AppThemeData get theme => Theme.of(this).extension<AppThemeData>() ?? _cachedTheme;
@@ -9,4 +10,6 @@ extension ThemeContextExtension on BuildContext {
   ThemeColors get colors => theme.themeColors;
 
   ThemeFonts get fonts => theme.themeFonts;
+
+  AppLocalizations get loc => AppLocalizations.of(this) ?? _cachedLocale;
 }

@@ -29,7 +29,7 @@ class ThemeModeSelectorBottomSheet extends StatelessWidget {
                 Navigator.pop(context, mode);
               },
               title: Text(
-                mode.title,
+                mode.titleOf(context.loc),
                 style: context.fonts.regular16,
               ),
             ),

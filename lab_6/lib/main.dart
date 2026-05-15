@@ -1,32 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:mad_flutter_practicum/app/constants.dart';
-import 'package:mad_flutter_practicum/app/home.dart';
-import 'package:mad_flutter_practicum/app/login_page.dart';
-import 'package:mad_flutter_practicum/app/splash_page.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
-import 'package:mad_flutter_practicum/app/utils/theme_mode_ext.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/preference_datasource_impl.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/rest_datasource_impl/rest_datasource_impl.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/sqflite_datasorce_impl/sqflite_datasource_impl.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/currency_repository_impl.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/news_repository_impl.dart';
-import 'package:mad_flutter_practicum/data/repository_impl/settings_repository_impl.dart';
-import 'package:mad_flutter_practicum/domain/datasource/db_datasource.dart';
-import 'package:mad_flutter_practicum/domain/datasource/preference_datasource.dart';
-import 'package:mad_flutter_practicum/domain/datasource/rest_datasource.dart';
-import 'package:mad_flutter_practicum/domain/model/app_theme_mode.dart';
-import 'package:mad_flutter_practicum/domain/repository/currency_repository.dart';
-import 'package:mad_flutter_practicum/domain/repository/news_repository.dart';
-import 'package:mad_flutter_practicum/domain/repository/settings_repository.dart';
-import 'package:provider/provider.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
+import 'package:mad_flutter_practicum/data/data.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await initializeDateFormatting(AppConstants.ruLocale, null);
 
   final sharedPreferences = await SharedPreferences.getInstance();
   final secureStorage = FlutterSecureStorage();
@@ -127,6 +106,9 @@ class _AppState extends State<App> {
               return isAuth ? const HomePage() : const LoginPage();
             },
           ),
+          locale: Locale('ru', 'RU'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
         );
       },
     );

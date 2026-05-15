@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/currency_list/currency_list_page.dart';
-import 'package:mad_flutter_practicum/app/profile/profile_page.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
-
-import 'news_list/news_list_page.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final Widget currentPage = _pages[_selectedIndex];
+    final AppLocalizations loc = context.loc;
 
     return Scaffold(
       body: currentPage,
@@ -53,18 +48,18 @@ class _HomePageState extends State<HomePage> {
                 assetPath: 'assets/icons/home.png',
                 isSelected: currentPage is CurrencyListPage,
               ),
-              label: 'Курс Валют',
+              label: loc.currencyRate,
             ),
             BottomNavigationBarItem(
               icon: TabWidget(
                 assetPath: 'assets/icons/news.png',
                 isSelected: currentPage is NewsListPage,
               ),
-              label: 'Новости',
+              label: loc.news,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Профиль',
+              label: loc.profile,
             ),
           ],
         ),

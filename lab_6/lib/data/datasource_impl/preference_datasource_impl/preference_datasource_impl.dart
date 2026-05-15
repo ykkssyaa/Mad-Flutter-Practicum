@@ -1,9 +1,8 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/mapper/app_theme_mode_mapper.dart';
-import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/model/app_theme_mode_dao.dart';
-import 'package:mad_flutter_practicum/domain/datasource/preference_datasource.dart';
-import 'package:mad_flutter_practicum/domain/model/app_theme_mode.dart';
+import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/mapper/mapper.dart';
+import 'package:mad_flutter_practicum/data/datasource_impl/preference_datasource_impl/model/model.dart';
+import 'package:mad_flutter_practicum/domain/domain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class _Keys {
   static const String theme = 'theme_key';

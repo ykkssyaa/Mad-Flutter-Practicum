@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mad_flutter_practicum/app/currency_detail/currency_detail_page.dart';
-import 'package:mad_flutter_practicum/app/utils/context_ext.dart';
-import 'package:mad_flutter_practicum/app/utils/theme/theme_data.dart';
+import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/domain/model/currency_model.dart';
 
 enum PriceChange {
@@ -15,6 +12,8 @@ class CurrencyCard extends StatelessWidget {
 
   final CurrencyModel model;
 
+  static final _tweenAnimation = Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero);
+
   @override
   Widget build(BuildContext context) {
     final PriceChange priceChange = model.asPriceChange;
@@ -25,7 +24,19 @@ class CurrencyCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => CurrencyDetailPage(title: model.name)),
+          PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+              return CurrencyDetailPage(title: model.name);
+            },
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              const Cubic curve = Curves.ease;
+
+              final Animatable<Offset> tween = _tweenAnimation.chain(CurveTween(curve: curve));
+              final Animation<Offset> offsetAnimation = animation.drive(tween);
+
+              return SlideTransition(position: offsetAnimation, child: child);
+            },
+          ),
         );
       },
       child: Container(
@@ -59,7 +70,7 @@ class CurrencyCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 4, right: 6),
               child: Text(
-                '(${model.nominal} шт.)',
+                context.loc.asNominal(model.nominal),
                 style: fonts.regular12,
               ),
             ),
