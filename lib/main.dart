@@ -10,6 +10,7 @@ import 'domain/repository/news_repository.dart';
 import 'app/home.dart' as app_home;
 import 'src/home_page.dart' as src_home;
 import 'domain/model/app_theme_mode.dart';
+import 'app/gen/l10n/app_localizations.dart';
 
 void main() {
   runApp(const RootApp());
@@ -61,6 +62,8 @@ class _RootAppState extends State<RootApp> {
                 : themeMode == AppThemeMode.light
                     ? ThemeMode.light
                     : ThemeMode.system,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: StreamBuilder<bool>(
               stream: _settingsRepository.isAuthStream,
               initialData: _settingsRepository.isAuth,

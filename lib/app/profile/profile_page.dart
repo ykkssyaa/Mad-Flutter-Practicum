@@ -10,35 +10,20 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
-  static final _tween = Tween<Alignment>(begin: Alignment.centerLeft, end: Alignment.centerRight);
-
+class _ProfilePageState extends State<ProfilePage> {
   late final ValueNotifier<AppThemeMode> _themeModeNotifier = ValueNotifier(_settingsRepository.themeMode);
-
-  late final AnimationController _alignmentController;
-  late Animation<AlignmentGeometry> _alignmentAnimation;
 
   SettingsRepository get _settingsRepository => context.read<SettingsRepository>();
 
   @override
   void initState() {
     super.initState();
-    _initAnimation();
   }
 
   @override
   void dispose() {
     _themeModeNotifier.dispose();
-    _alignmentController.dispose();
     super.dispose();
-  }
-
-  void _initAnimation() {
-    _alignmentController = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    )..repeat(reverse: true);
-    _alignmentAnimation = _tween.animate(_alignmentController);
   }
 
   @override
@@ -77,8 +62,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               ),
             ),
             const Spacer(),
-            AlignTransition(
-              alignment: _alignmentAnimation,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: ElevatedButton(
                 onPressed: () => context.read<SettingsRepository>().setToken(null),
                 child: Text(

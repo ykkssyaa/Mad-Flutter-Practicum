@@ -29,7 +29,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final Widget currentPage = _pages[_selectedIndex];
-    final AppLocalizations loc = AppLocalizations.of(context)!;
+    final AppLocalizations? loc = AppLocalizations.of(context);
+
+    if (loc == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return Scaffold(
       body: currentPage,

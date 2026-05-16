@@ -29,8 +29,16 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Unified root application — work in progress'),
-            const SizedBox(height: 16),
+            const Text(
+              'Mad Flutter Practicum',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Unified Root Application',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 32),
             StreamBuilder<bool>(
               stream: settings.isAuthStream,
               initialData: settings.isAuth,
