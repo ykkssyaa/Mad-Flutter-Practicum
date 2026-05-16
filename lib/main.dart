@@ -56,7 +56,34 @@ class _RootAppState extends State<RootApp> {
             title: 'Mad Flutter Practicum - Unified',
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(),
-            darkTheme: ThemeData.dark(),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              useMaterial3: true,
+              scaffoldBackgroundColor: const Color(0xFF121212),
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color(0xFF1E1E1E),
+                foregroundColor: Colors.white,
+              ),
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(color: Colors.white),
+                bodyMedium: TextStyle(color: Colors.white),
+                bodySmall: TextStyle(color: Colors.white70),
+                titleLarge: TextStyle(color: Colors.white),
+                titleMedium: TextStyle(color: Colors.white),
+                titleSmall: TextStyle(color: Colors.white70),
+                labelLarge: TextStyle(color: Colors.white),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+              ),
+              bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                backgroundColor: Color(0xFF1E1E1E),
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white54,
+              ),
+            ),
             themeMode: themeMode == AppThemeMode.dark
                 ? ThemeMode.dark
                 : themeMode == AppThemeMode.light
