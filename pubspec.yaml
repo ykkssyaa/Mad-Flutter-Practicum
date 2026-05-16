@@ -1,0 +1,47 @@
+name: mad_flutter_practicum
+description: Unified root Flutter application for Mad Flutter Practicum (desktop-focused)
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  provider: 6.1.5
+  url_launcher: 6.3.1
+
+  http: 1.4.0
+  rss_dart: 1.0.13
+  json_annotation: 4.9.0
+
+  path: 1.9.1
+  path_provider: 2.1.5
+
+  shared_preferences: 2.5.3
+
+  intl: 0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: 5.0.0
+
+  build_runner: 2.4.15
+  json_serializable: 6.9.5
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/fonts/
+

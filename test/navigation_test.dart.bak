@@ -1,0 +1,29 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:mad_flutter_practicum/main.dart';
+import 'package:mad_flutter_practicum/app/news_list/news_list_page.dart';
+
+void main() {
+  testWidgets('Navigation: default page and bottom navigation', (tester) async {
+    await tester.pumpWidget(const RootApp());
+    await tester.pumpAndSettle();
+
+    // App starts and shows currency page title in AppBar
+    expect(find.text('Exchange Rate'), findsWidgets);
+
+    // Tap on News tab
+    final newsBtnFinder = find.byIcon(Icons.newspaper);
+    if (newsBtnFinder.evaluate().isEmpty) {
+      // Fallback to finding news tab by partial text match in bottom navigation
+      await tester.tap(find.byTooltip('News'));
+    } else {
+      await tester.tap(newsBtnFinder);
+    }
+    await tester.pumpAndSettle();
+
+    // Verify News page is loaded by checking for AppBar with news title
+    // or by checking that news content appears
+    expect(find.byType(NewsListPage), findsOneWidget);
+  });
+}
+

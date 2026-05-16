@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lab_*/**
+    - build/**
+    - openspec/**
+    - .github/**
+
+linter:
+  rules:
+    avoid_print: false
+
