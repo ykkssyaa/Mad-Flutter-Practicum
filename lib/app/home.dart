@@ -54,23 +54,19 @@ class _HomePageState extends State<HomePage> {
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
+          selectedItemColor: context.colors.bottomNavBarSelectedItem,
+          unselectedItemColor: context.colors.bottomNavBarUnselectedItem,
           items: [
             BottomNavigationBarItem(
-              icon: TabWidget(
-                assetPath: 'assets/icons/home.png',
-                isSelected: _selectedIndex == 0,
-              ),
+              icon: const Icon(Icons.home),
               label: loc.currencyRate,
             ),
             BottomNavigationBarItem(
-              icon: TabWidget(
-                assetPath: 'assets/icons/news.png',
-                isSelected: _selectedIndex == 1,
-              ),
+              icon: const Icon(Icons.article),
               label: loc.news,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: const Icon(Icons.person),
               label: loc.profile,
             ),
           ],
@@ -80,31 +76,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class TabWidget extends StatelessWidget {
-  const TabWidget({
-    Key? key,
-    required this.assetPath,
-    required this.isSelected,
-  }) : super(key: key);
-
-  final String assetPath;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeColors colors = context.colors;
-
-    return SizedBox.square(
-      dimension: 24,
-      child: Image.asset(
-        assetPath,
-        color: isSelected ? colors.bottomNavBarSelectedItem : colors.bottomNavBarUnselectedItem,
-        errorBuilder: (context, error, stackTrace) => Icon(
-          Icons.circle,
-          size: 18,
-          color: isSelected ? colors.bottomNavBarSelectedItem : colors.bottomNavBarUnselectedItem,
-        ),
-      ),
-    );
-  }
-}

@@ -14,9 +14,19 @@ extension ThemeExt on ThemeData {
       scaffoldBackgroundColor: colors.scaffoldBackground,
       appBarTheme: AppBarTheme(
         backgroundColor: colors.appBarBackground,
-        titleTextStyle: fonts.regular16.copyWith(color: colors.secondary),
+        foregroundColor: colors.secondary,
+        titleTextStyle: fonts.regular16.copyWith(
+          color: colors.secondary,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.2,
+        ),
         centerTitle: true,
+        elevation: 1.5,
+        shadowColor: colors.black.withValues(alpha: 0.12),
+        toolbarHeight: 64,
         surfaceTintColor: colors.appBarSurfaceTint,
+        scrolledUnderElevation: 2,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: colors.bottomNavBarBackground,

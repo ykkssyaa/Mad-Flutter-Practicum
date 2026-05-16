@@ -40,49 +40,77 @@ class CurrencyCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
         decoration: BoxDecoration(
           color: colors.cardColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
         child: Row(
           children: [
             CurrencyIcon(title: model.symbol),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: Text(
-                  model.name,
-                  style: fonts.semiBold12,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      model.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: fonts.semiBold12.copyWith(fontSize: 15),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      context.loc.asNominal(model.nominal),
+                      style: fonts.regular12.copyWith(color: colors.tin),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Text(
-              model.value.toStringAsFixed(2),
-              style: fonts.semiBold12.copyWith(
-                color: switch (priceChange) {
-                  PriceChange.up => colors.greenWrasse,
-                  PriceChange.down => colors.red,
-                  PriceChange.stable => colors.stormyGrey,
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 4, right: 6),
-              child: Text(
-                context.loc.asNominal(model.nominal),
-                style: fonts.regular12,
-              ),
-            ),
-            Image.asset(
-              switch (priceChange) {
-                PriceChange.up => 'assets/icons/arrow_up.png',
-                PriceChange.down => 'assets/icons/arrow_down.png',
-                PriceChange.stable => 'assets/icons/arrow_up.png',
-              },
-              width: 10,
-              height: 10,
-              errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  model.value.toStringAsFixed(2),
+                  style: fonts.semiBold12.copyWith(
+                    fontSize: 16,
+                    color: switch (priceChange) {
+                      PriceChange.up => colors.greenWrasse,
+                      PriceChange.down => colors.red,
+                      PriceChange.stable => colors.stormyGrey,
+                    },
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Image.asset(
+                      switch (priceChange) {
+                        PriceChange.up => 'assets/icons/arrow_up.png',
+                        PriceChange.down => 'assets/icons/arrow_down.png',
+                        PriceChange.stable => 'assets/icons/arrow_up.png',
+                      },
+                      width: 12,
+                      height: 12,
+                      errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      model.symbol,
+                      style: fonts.regular12.copyWith(color: colors.tin),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
@@ -99,7 +127,7 @@ class CurrencyIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints.tight(const Size.square(40)),
+      constraints: BoxConstraints.tight(const Size.square(44)),
       decoration: BoxDecoration(
         color: context.colors.currencyCardSymbolBackground,
         shape: BoxShape.circle,
@@ -107,7 +135,7 @@ class CurrencyIcon extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: context.fonts.semiBold12.copyWith(color: Colors.white),
+          style: context.fonts.semiBold12.copyWith(color: Colors.white, fontSize: 13),
         ),
       ),
     );

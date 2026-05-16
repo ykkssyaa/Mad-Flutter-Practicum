@@ -37,38 +37,91 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
-            ValueListenableBuilder(
-              valueListenable: _themeModeNotifier,
-              builder: (BuildContext context, AppThemeMode mode, Widget? child) {
-                return ListTile(
-                  contentPadding: const EdgeInsets.only(left: 24),
-                  leading: const Icon(Icons.dark_mode),
-                  title: child,
-                  subtitle: Text(
-                    mode.titleOf(loc),
-                    style: fonts.regular12,
-                  ),
+            // Prominent theme selector card
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                color: context.colors.cardColor,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
                   onTap: () async {
-                    final AppThemeMode? newMode = await ThemeModeSelectorBottomSheet.show(context, mode);
+                    final AppThemeMode current = _themeModeNotifier.value;
+                    final AppThemeMode? newMode = await ThemeModeSelectorBottomSheet.show(context, current);
                     if (newMode == null) return;
 
                     _themeModeNotifier.value = newMode;
                   },
-                );
-              },
-              child: Text(
-                loc.theme,
-                style: fonts.regular16,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: context.colors.blueDepression.withAlpha(20),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.dark_mode,
+                            size: 26,
+                            color: context.colors.blueDepression,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ValueListenableBuilder<AppThemeMode>(
+                            valueListenable: _themeModeNotifier,
+                            builder: (context, mode, child) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  loc.theme,
+                                  style: fonts.regular16.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  mode.titleOf(loc),
+                                  style: fonts.regular14.copyWith(color: context.colors.tin),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: context.colors.platinumGranite,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
+
             const Spacer(),
+
+            // Large full-width logout button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: ElevatedButton(
-                onPressed: () => context.read<SettingsRepository>().setToken(null),
-                child: Text(
-                  loc.logout,
-                  style: fonts.regular14.copyWith(color: context.colors.red),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => context.read<SettingsRepository>().setToken(null),
+                  icon: Icon(Icons.exit_to_app, color: context.colors.white),
+                  label: Text(
+                    loc.logout,
+                    style: fonts.regular16.copyWith(color: context.colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: context.colors.red,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    elevation: 4,
+                    textStyle: fonts.regular16,
+                  ),
                 ),
               ),
             ),

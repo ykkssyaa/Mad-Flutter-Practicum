@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/domain/domain.dart';
 
@@ -44,16 +45,23 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
   void _initData() {
     final currencyRepository = context.read<CurrencyRepository>();
 
+    debugPrint('[CurrencyListPage] _initData: Starting data fetch');
     _currencyListFuture = currencyRepository.getCurrencyList().then((List<CurrencyModel> value) {
+      debugPrint('[CurrencyListPage] _initData.then: Received ${value.length} currencies, returning them');
       _allCurrencies = value;
       _filteredCurrenciesNotifier.value = value;
 
       _fadeController.forward(); // запускаем анимацию
 
       currencyRepository.saveCurrencyList(value);
+      debugPrint('[CurrencyListPage] _initData.then: Saved to storage, returning value with ${value.length} items');
 
       return value;
+    }).catchError((e) {
+      debugPrint('[CurrencyListPage] _initData.catchError: Error during fetch: $e');
+      throw e;
     });
+    debugPrint('[CurrencyListPage] _initData: Future assigned, future ref: $_currencyListFuture');
   }
 
   void _filterCurrencies(String query) {
@@ -72,8 +80,28 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
       body: FutureBuilder<List<CurrencyModel>>(
         future: _currencyListFuture,
         builder: (BuildContext context, AsyncSnapshot<List<CurrencyModel>> snapshot) {
-          final List<CurrencyModel>? data = snapshot.data;
-          if (data == null) return const SizedBox.shrink();
+          debugPrint('[CurrencyListPage] FutureBuilder builder called:');
+          debugPrint('  - connectionState: ${snapshot.connectionState}');
+          debugPrint('  - hasData: ${snapshot.hasData}');
+          debugPrint('  - hasError: ${snapshot.hasError}');
+          debugPrint('  - data type: ${snapshot.data.runtimeType}');
+          debugPrint('  - data length: ${snapshot.data?.length ?? "null"}');
+          if (snapshot.hasError) {
+            debugPrint('  - error: ${snapshot.error}');
+          }
+
+          if (snapshot.hasError) {
+            return _StateMessage(
+              title: context.loc.currencyRate,
+              message: 'Не удалось загрузить курсы валют. Попробуйте позже.',
+            );
+          }
+
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
           return FadeTransition(
             opacity: _fadeController.view,
@@ -87,6 +115,20 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
                   child: ValueListenableBuilder<List<CurrencyModel>>(
                     valueListenable: _filteredCurrenciesNotifier,
                     builder: (BuildContext context, List<CurrencyModel> data, _) {
+                      if (_allCurrencies.isEmpty) {
+                        return _StateMessage(
+                          title: context.loc.currencyRate,
+                          message: 'Не удалось загрузить курсы валют.',
+                        );
+                      }
+
+                      if (data.isEmpty) {
+                        return _StateMessage(
+                          title: context.loc.currencyRate,
+                          message: 'Курсы валют не найдены.',
+                        );
+                      }
+
                       return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -111,3 +153,36 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
     );
   }
 }
+
+class _StateMessage extends StatelessWidget {
+  const _StateMessage({required this.title, required this.message});
+
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: context.fonts.semiBold12,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: context.fonts.regular12.copyWith(color: context.colors.tin),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

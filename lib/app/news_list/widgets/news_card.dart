@@ -19,20 +19,29 @@ class NewsCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => tryLaunchUrl(model.link),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
         decoration: BoxDecoration(
           color: context.colors.cardColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               model.title,
-              style: fonts.semiBold12,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: fonts.semiBold12.copyWith(fontSize: 16, height: 1.25),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

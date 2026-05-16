@@ -8,9 +8,10 @@ import 'data/repository_impl/news_repository_impl.dart';
 import 'domain/repository/currency_repository.dart';
 import 'domain/repository/news_repository.dart';
 import 'app/home.dart' as app_home;
-import 'src/home_page.dart' as src_home;
+import 'app/login_page.dart' as app_login;
 import 'domain/model/app_theme_mode.dart';
 import 'app/gen/l10n/app_localizations.dart';
+import 'app/utils/theme/theme_data.dart';
 
 void main() {
   runApp(const RootApp());
@@ -55,7 +56,7 @@ class _RootAppState extends State<RootApp> {
           return MaterialApp(
             title: 'Mad Flutter Practicum - Unified',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(),
+            theme: ThemeData.light().appThemeData,
             darkTheme: ThemeData(
               brightness: Brightness.dark,
               useMaterial3: true,
@@ -63,6 +64,9 @@ class _RootAppState extends State<RootApp> {
               appBarTheme: const AppBarTheme(
                 backgroundColor: Color(0xFF1E1E1E),
                 foregroundColor: Colors.white,
+              ),
+              popupMenuTheme: const PopupMenuThemeData(
+                textStyle: TextStyle(color: Colors.white),
               ),
               textTheme: const TextTheme(
                 bodyLarge: TextStyle(color: Colors.white),
@@ -83,7 +87,7 @@ class _RootAppState extends State<RootApp> {
                 selectedItemColor: Colors.white,
                 unselectedItemColor: Colors.white54,
               ),
-            ),
+            ).appThemeData,
             themeMode: themeMode == AppThemeMode.dark
                 ? ThemeMode.dark
                 : themeMode == AppThemeMode.light
@@ -96,7 +100,7 @@ class _RootAppState extends State<RootApp> {
               initialData: _settingsRepository.isAuth,
               builder: (context, snapshot) {
                 final isAuth = snapshot.data ?? false;
-                return isAuth ? const app_home.HomePage() : const src_home.HomePage();
+                return isAuth ? const app_home.HomePage() : const app_login.LoginPage();
               },
             ),
           );

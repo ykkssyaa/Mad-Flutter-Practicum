@@ -23,6 +23,7 @@ import '../domain/repository/settings_repository_impl.dart';
 import '../domain/repository/settings_repository.dart';
 import '../domain/repository/currency_repository.dart';
 import '../domain/repository/news_repository.dart';
+import 'utils/theme/theme_data.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: 'Mad Flutter Practicum',
           debugShowCheckedModeBanner: false,
-          theme: state.isDark ? ThemeData.dark() : ThemeData.light(),
+          theme: state.isDark ? ThemeData.dark().appThemeData : ThemeData.light().appThemeData,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: const HomePage(),

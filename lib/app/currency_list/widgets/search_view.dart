@@ -9,7 +9,7 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
-      style: context.fonts.regular12,
+      style: context.fonts.regular12.copyWith(color: context.colors.secondary),
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(13, 9, 11, 9),

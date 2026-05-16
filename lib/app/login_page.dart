@@ -40,21 +40,81 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     final settings = context.read<SettingsRepository>();
     final loc = AppLocalizations.of(context)!;
+    final ThemeFonts fonts = context.fonts;
+    final ThemeColors colors = context.colors;
 
     return Scaffold(
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _controller,
-          child: ElevatedButton(
-            onPressed: () => settings.setToken(_generateRandomToken()),
-            child: Text(
-              loc.login,
-              style: context.fonts.regular14,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Rotating logo
+                AnimatedBuilder(
+                  animation: _controller,
+                  child: Container(
+                    width: 96,
+                    height: 96,
+                    decoration: BoxDecoration(
+                      color: colors.blueDepression.withAlpha(30),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Icon(
+                      Icons.currency_exchange,
+                      size: 48,
+                      color: colors.blueDepression,
+                    ),
+                  ),
+                  builder: (BuildContext context, Widget? child) => Transform.rotate(angle: _controller.value * 2 * pi, child: child),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Title
+                Text(
+                  'Вход в приложение',
+                  style: fonts.regular16.copyWith(fontSize: 22, fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 12),
+
+                // Subtitle / description
+                Text(
+                  'Войдите, чтобы просматривать актуальные курсы валют и новости.',
+                  style: fonts.regular14.copyWith(color: colors.tin),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 28),
+
+                // Big login button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () => settings.setToken(_generateRandomToken()),
+                    icon: Icon(Icons.login, color: colors.white),
+                    label: Text(
+                      loc.login,
+                      style: fonts.regular16.copyWith(color: colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colors.blueDepression,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      elevation: 6,
+                      textStyle: fonts.regular16,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+              ],
             ),
           ),
-          builder: (BuildContext context, Widget? child) {
-            return Transform.rotate(angle: _controller.value * 2 * pi, child: child);
-          },
         ),
       ),
     );
