@@ -129,18 +129,39 @@ class CurrencyIcon extends StatelessWidget {
 
   final String title;
 
+  static Color _colorForTitle(String title) {
+    final String normalized = title.trim().toUpperCase();
+    int hash = 0;
+
+    for (final int codeUnit in normalized.codeUnits) {
+      hash = 0x1fffffff & (hash + codeUnit);
+      hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+      hash ^= (hash >> 6);
+    }
+
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    hash ^= (hash >> 11);
+    hash = 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+
+    final double hue = (hash % 360).toDouble();
+    return HSLColor.fromAHSL(1, hue, 0.62, 0.48).toColor();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Color backgroundColor = _colorForTitle(title);
+    final Color foregroundColor = backgroundColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+
     return Container(
       constraints: BoxConstraints.tight(const Size.square(44)),
       decoration: BoxDecoration(
-        color: context.colors.currencyCardSymbolBackground,
+        color: backgroundColor,
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           title,
-          style: context.fonts.semiBold12.copyWith(color: Colors.white, fontSize: 13),
+          style: context.fonts.semiBold12.copyWith(color: foregroundColor, fontSize: 13),
         ),
       ),
     );
