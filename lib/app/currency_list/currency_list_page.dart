@@ -90,7 +90,7 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
       _fadeController.forward();
     } catch (e) {
       debugPrint('[CurrencyListPage] _refreshData error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Не удалось обновить данные')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.loc.dataRefreshFailed)));
     } finally {
       if (mounted) setState(() => _isRefreshing = false);
     }
@@ -130,7 +130,7 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
           if (snapshot.hasError) {
             return _StateMessage(
               title: context.loc.currencyRate,
-              message: 'Не удалось загрузить курсы валют. Попробуйте позже.',
+              message: context.loc.currencyLoadFailedTryLater,
             );
           }
 
@@ -155,14 +155,14 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
                       if (_allCurrencies.isEmpty) {
                         return _StateMessage(
                           title: context.loc.currencyRate,
-                          message: 'Не удалось загрузить курсы валют.',
+                          message: context.loc.currencyLoadFailed,
                         );
                       }
 
                       if (data.isEmpty) {
                         return _StateMessage(
                           title: context.loc.currencyRate,
-                          message: 'Курсы валют не найдены.',
+                          message: context.loc.currencyNotFound,
                         );
                       }
 

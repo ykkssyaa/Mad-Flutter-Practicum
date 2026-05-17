@@ -36,7 +36,7 @@ class _CurrencyDetailPageState extends State<CurrencyDetailPage> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back),
         ),
-        title: Text(widget.model?.name ?? widget.title ?? ''),
+        title: Text(widget.model != null ? context.currencyName(widget.model!) : widget.title ?? ''),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(22, 10, 22, 40),
@@ -55,7 +55,7 @@ class _CurrencyDetailPageState extends State<CurrencyDetailPage> {
               final List<CurrencyHistoryItem> history = snapshot.data ?? <CurrencyHistoryItem>[];
 
               if (history.isEmpty) {
-                return const Center(child: Text('История недоступна'));
+                return Center(child: Text(context.loc.historyUnavailable));
               }
 
               return Column(

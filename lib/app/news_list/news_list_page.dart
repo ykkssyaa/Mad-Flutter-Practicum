@@ -79,7 +79,7 @@ class _NewsListPageState extends State<NewsListPage> with SingleTickerProviderSt
           if (snapshot.hasError) {
             return _StateMessage(
               title: context.loc.news,
-              message: 'Не удалось загрузить новости. Попробуйте позже.',
+              message: context.loc.newsLoadFailedTryLater,
             );
           }
 
@@ -94,7 +94,7 @@ class _NewsListPageState extends State<NewsListPage> with SingleTickerProviderSt
           if (data.isEmpty) {
             return _StateMessage(
               title: context.loc.news,
-              message: 'Не удалось загрузить новости.',
+              message: context.loc.newsLoadFailed,
             );
           }
 

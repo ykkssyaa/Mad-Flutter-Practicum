@@ -1,0 +1,37 @@
+{
+  "@@locale": "en",
+  "appTitle": "Mad Flutter Practicum",
+  "login": "Login",
+  "loginTitle": "Sign in",
+  "loginSubtitle": "Sign in to view current exchange rates and latest news.",
+  "logout": "Logout",
+  "currencyRate": "Exchange rate",
+  "news": "News",
+  "profile": "Profile",
+  "theme": "Theme",
+  "language": "Language",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "search": "Search",
+  "russian": "Russian",
+  "english": "English",
+  "german": "German",
+  "historyUnavailable": "History is unavailable",
+  "dataRefreshFailed": "Failed to refresh data",
+  "currencyLoadFailedTryLater": "Failed to load exchange rates. Please try again later.",
+  "currencyLoadFailed": "Failed to load exchange rates.",
+  "currencyNotFound": "No exchange rates found.",
+  "newsLoadFailedTryLater": "Failed to load news. Please try again later.",
+  "newsLoadFailed": "Failed to load news.",
+  "sourceCbr": "cbr.ru",
+  "asNominal": "{value, plural, one{({value} item)} other{({value} items)}}",
+  "@asNominal": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  }
+}
+

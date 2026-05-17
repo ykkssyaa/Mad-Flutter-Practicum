@@ -1,4 +1,5 @@
 import 'package:mad_flutter_practicum/domain/model/app_theme_mode.dart';
+import 'package:flutter/widgets.dart';
 
 abstract class SettingsRepository {
   Future<void> initAsyncData();
@@ -12,6 +13,12 @@ abstract class SettingsRepository {
   AppThemeMode get themeMode;
 
   void setThemeMode(AppThemeMode mode);
+
+  Stream<Locale> get localeStream;
+
+  Locale get locale;
+
+  void setLocale(Locale locale);
 
   Future<String?> getToken();
 

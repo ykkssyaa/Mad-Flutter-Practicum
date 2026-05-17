@@ -1,0 +1,37 @@
+{
+  "@@locale": "de",
+  "appTitle": "Mad Flutter Practicum",
+  "login": "Anmelden",
+  "loginTitle": "Anmeldung",
+  "loginSubtitle": "Melden Sie sich an, um aktuelle Wechselkurse und Nachrichten zu sehen.",
+  "logout": "Abmelden",
+  "currencyRate": "Wechselkurs",
+  "news": "Nachrichten",
+  "profile": "Profil",
+  "theme": "Design",
+  "language": "Sprache",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "system": "System",
+  "search": "Suche",
+  "russian": "Russisch",
+  "english": "Englisch",
+  "german": "Deutsch",
+  "historyUnavailable": "Verlauf ist nicht verfugbar",
+  "dataRefreshFailed": "Daten konnten nicht aktualisiert werden",
+  "currencyLoadFailedTryLater": "Wechselkurse konnten nicht geladen werden. Bitte versuchen Sie es spater erneut.",
+  "currencyLoadFailed": "Wechselkurse konnten nicht geladen werden.",
+  "currencyNotFound": "Keine Wechselkurse gefunden.",
+  "newsLoadFailedTryLater": "Nachrichten konnten nicht geladen werden. Bitte versuchen Sie es spater erneut.",
+  "newsLoadFailed": "Nachrichten konnten nicht geladen werden.",
+  "sourceCbr": "cbr.ru",
+  "asNominal": "{value, plural, one{({value} Stuck)} other{({value} Stuck)}}",
+  "@asNominal": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  }
+}
+

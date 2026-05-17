@@ -7,11 +7,11 @@ class NewsCard extends StatelessWidget {
 
   final NewsModel model;
 
-  static const String _resource = 'cbr.ru';
-
   @override
   Widget build(BuildContext context) {
     final DateTime? date = model.date;
+    final String localeTag = Localizations.localeOf(context).toLanguageTag();
+    final DateFormat dateFormat = DateFormat.yMd(localeTag).add_jm();
 
     final ThemeFonts fonts = context.fonts;
     final ThemeColors colors = context.colors;
@@ -47,11 +47,11 @@ class NewsCard extends StatelessWidget {
                 children: [
                   if (date != null)
                     Text(
-                      DateFormat(AppConstants.newsDateTimeFormat).format(date),
+                      dateFormat.format(date),
                       style: fonts.regular12.copyWith(color: colors.tin),
                     ),
                   Text(
-                    _resource,
+                    context.loc.sourceCbr,
                     style: fonts.regular12.copyWith(color: colors.tin),
                   ),
                 ],

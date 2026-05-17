@@ -13,12 +13,13 @@ class CurrencyInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeFonts fonts = context.fonts;
     final ThemeColors colors = context.colors;
+    final String localeTag = Localizations.localeOf(context).toLanguageTag();
 
     // determine price change
     final bool isUp = previousValue != null ? value > previousValue! : false;
     final bool isDown = previousValue != null ? value < previousValue! : false;
 
-    final String formattedDate = DateFormat(AppConstants.newsDateTimeFormat).format(dateTime);
+    final String formattedDate = DateFormat.yMd(localeTag).add_jm().format(dateTime);
 
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 24, 8, 24),

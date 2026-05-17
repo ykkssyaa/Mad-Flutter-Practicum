@@ -1,6 +1,7 @@
 import 'package:mad_flutter_practicum/app/app.dart';
 import 'package:mad_flutter_practicum/app/currency_detail/currency_detail_page.dart';
 import 'package:mad_flutter_practicum/domain/model/currency_model.dart';
+import 'package:intl/intl.dart';
 
 enum PriceChange {
   up,
@@ -20,6 +21,9 @@ class CurrencyCard extends StatelessWidget {
     final PriceChange priceChange = model.asPriceChange;
     final ThemeFonts fonts = context.fonts;
     final ThemeColors colors = context.colors;
+    final String localeTag = Localizations.localeOf(context).toLanguageTag();
+    final NumberFormat priceFormat = NumberFormat.decimalPattern(localeTag);
+    final String localizedPrice = priceFormat.format(model.value);
 
     return GestureDetector(
       onTap: () {
@@ -63,7 +67,7 @@ class CurrencyCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      model.name,
+                      context.currencyName(model),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: fonts.semiBold12.copyWith(fontSize: 15),
@@ -81,7 +85,7 @@ class CurrencyCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  model.value.toStringAsFixed(2),
+                  localizedPrice,
                   style: fonts.semiBold12.copyWith(
                     fontSize: 16,
                     color: switch (priceChange) {

@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                 // Title
                 Text(
-                  'Вход в приложение',
+                  loc.loginTitle,
                   style: fonts.regular16.copyWith(fontSize: 22, fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                 // Subtitle / description
                 Text(
-                  'Войдите, чтобы просматривать актуальные курсы валют и новости.',
+                  loc.loginSubtitle,
                   style: fonts.regular14.copyWith(color: colors.tin),
                   textAlign: TextAlign.center,
                 ),

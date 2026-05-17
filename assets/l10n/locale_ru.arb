@@ -1,0 +1,37 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Mad Flutter Practicum",
+  "login": "Войти",
+  "loginTitle": "Вход в приложение",
+  "loginSubtitle": "Войдите, чтобы просматривать актуальные курсы валют и новости.",
+  "logout": "Выйти",
+  "currencyRate": "Курс валют",
+  "news": "Новости",
+  "profile": "Профиль",
+  "theme": "Тема",
+  "language": "Язык",
+  "light": "Светлая",
+  "dark": "Темная",
+  "system": "Системная",
+  "search": "Поиск",
+  "russian": "Русский",
+  "english": "Английский",
+  "german": "Немецкий",
+  "historyUnavailable": "История недоступна",
+  "dataRefreshFailed": "Не удалось обновить данные",
+  "currencyLoadFailedTryLater": "Не удалось загрузить курсы валют. Попробуйте позже.",
+  "currencyLoadFailed": "Не удалось загрузить курсы валют.",
+  "currencyNotFound": "Курсы валют не найдены.",
+  "newsLoadFailedTryLater": "Не удалось загрузить новости. Попробуйте позже.",
+  "newsLoadFailed": "Не удалось загрузить новости.",
+  "sourceCbr": "cbr.ru",
+  "asNominal": "{value, plural, one{({value} штука)} few{({value} штуки)} many{({value} штук)} other{({value} штуки)}}",
+  "@asNominal": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  }
+}
+
