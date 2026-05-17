@@ -51,5 +51,9 @@ class SettingsRepositoryImpl implements SettingsRepository {
     _token = token;
     _isAuthController.add(isAuth);
   }
-}
 
+  void dispose() {
+    _isAuthController.close();
+    _themeController.close();
+  }
+}

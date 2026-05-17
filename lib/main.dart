@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'domain/repository/settings_repository_impl.dart';
+import 'data/repository_impl/settings_repository_impl.dart';
 import 'domain/repository/settings_repository.dart';
-import 'data/repository_impl/currency_repository_impl.dart';
-import 'data/repository_impl/news_repository_impl.dart';
 import 'domain/repository/currency_repository.dart';
 import 'domain/repository/news_repository.dart';
+import 'data/repository_impl/currency_repository_impl.dart';
+import 'data/repository_impl/news_repository_impl.dart';
 import 'app/home.dart' as app_home;
 import 'app/login_page.dart' as app_login;
 import 'domain/model/app_theme_mode.dart';
