@@ -1,4 +1,5 @@
 import 'package:mad_flutter_practicum/app/app.dart';
+import 'package:mad_flutter_practicum/app/currency_detail/currency_detail_page.dart';
 import 'package:mad_flutter_practicum/domain/model/currency_model.dart';
 
 enum PriceChange {
@@ -26,7 +27,7 @@ class CurrencyCard extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-              return CurrencyDetailPage(title: model.name);
+              return CurrencyDetailPage(model: model);
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               const Cubic curve = Curves.ease;

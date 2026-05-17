@@ -8,5 +8,9 @@ abstract interface class DbDatasource {
   Future<void> saveCurrencyList(List<CurrencyModel> value);
 
   Future<void> saveNewsList(List<NewsModel> value);
+
+  Future<void> saveCurrencyHistory(String currencyId, List<CurrencyHistoryItem> value);
+
+  Future<List<CurrencyHistoryItem>> getCurrencyHistory(String currencyId);
 }
 

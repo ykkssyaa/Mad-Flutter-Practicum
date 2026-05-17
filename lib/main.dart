@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'data/repository_impl/settings_repository_impl.dart';
 import 'domain/repository/settings_repository.dart';
@@ -14,6 +16,12 @@ import 'app/gen/l10n/app_localizations.dart';
 import 'app/utils/theme/theme_data.dart';
 
 void main() {
+  // Initialize sqlite ffi for desktop platforms so sqflite works on Windows/Linux/Mac
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
+
   runApp(const RootApp());
 }
 

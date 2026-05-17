@@ -20,6 +20,7 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
   late Future<List<CurrencyModel>> _currencyListFuture;
 
   List<CurrencyModel> _allCurrencies = [];
+  bool _isRefreshing = false;
 
   @override
   void initState() {
@@ -73,10 +74,46 @@ class _CurrencyListPageState extends State<CurrencyListPage> with SingleTickerPr
     _filteredCurrenciesNotifier.value = result.toList(growable: false);
   }
 
+  Future<void> _refreshData() async {
+    if (_isRefreshing) return;
+    setState(() => _isRefreshing = true);
+
+    final currencyRepository = context.read<CurrencyRepository>();
+    try {
+      final List<CurrencyModel> refreshed = await currencyRepository.refreshCurrencyList();
+
+      _allCurrencies = refreshed;
+      _filteredCurrenciesNotifier.value = refreshed;
+
+      // restart animation
+      _fadeController.reset();
+      _fadeController.forward();
+    } catch (e) {
+      debugPrint('[CurrencyListPage] _refreshData error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Не удалось обновить данные')));
+    } finally {
+      if (mounted) setState(() => _isRefreshing = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.loc.currencyRate)),
+      appBar: AppBar(
+        title: Text(context.loc.currencyRate),
+        actions: [
+          if (_isRefreshing)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Center(child: SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))),
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: _refreshData,
+            ),
+        ],
+      ),
       body: FutureBuilder<List<CurrencyModel>>(
         future: _currencyListFuture,
         builder: (BuildContext context, AsyncSnapshot<List<CurrencyModel>> snapshot) {
