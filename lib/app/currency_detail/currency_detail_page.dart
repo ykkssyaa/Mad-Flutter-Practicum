@@ -58,18 +58,20 @@ class _CurrencyDetailPageState extends State<CurrencyDetailPage> {
                 return Center(child: Text(context.loc.historyUnavailable));
               }
 
-              return Column(
-                children: [
-                  for (int i = 0; i < history.length; i++)
-                    Padding(
-                      padding: i == 0 ? EdgeInsets.zero : const EdgeInsets.only(top: 10),
-                      child: CurrencyInfoCard(
-                        dateTime: history[i].date,
-                        value: history[i].value,
-                        previousValue: i > 0 ? history[i - 1].value : null,
-                      ),
-                    ),
-                ],
+              // Use a scrollable ListView instead of Column to avoid RenderFlex overflow
+              return ListView.separated(
+                itemCount: history.length,
+                padding: EdgeInsets.zero,
+                separatorBuilder: (_, __) => const SizedBox(height: 10),
+                itemBuilder: (context, i) {
+                  final item = history[i];
+                  return CurrencyInfoCard(
+                    dateTime: item.date,
+                    value: item.value,
+                    // history is ordered newest first, so the older value is at i+1
+                    previousValue: i < history.length - 1 ? history[i + 1].value : null,
+                  );
+                },
               );
             },
           ),
